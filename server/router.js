@@ -2,7 +2,7 @@ const controller = require('./controllers');
 const mid = require('./middleware');
 
 const router = (app) => {
-  app.get('/getMessage', mid.requiresLogin, controller.Message.getMessages);
+  app.get('/getMessages', mid.requiresLogin, controller.Message.getMessages);
 
   app.get('/login', mid.requiresSecure, mid.requiresLogout, controller.Account.loginPage);
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controller.Account.login);

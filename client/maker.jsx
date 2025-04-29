@@ -3,102 +3,103 @@ const React = require('react');
 const { useState, useEffect } = React;
 const { createRoot } = require('react-dom/client');
 
-const handleDomo = (e, onDomoAdded) => {
+const handleMessage = (e, onMessageAdded) => {
     e.preventDefault();
     helper.hideError();
 
-    const name = e.target.querySelector('#domoName').value;
-    const age = e.target.querySelector('#domoAge').value;
-    const favFood = e.target.querySelector('#domoFavFood').value;
+    const title = e.target.querySelector('#messageTitle').value;
+    const subtitle = e.target.querySelector('#messageAge').value;
+    const content = e.target.querySelector('#messageContent').value;
 
-    if (!name || !age) {
+    if (!title || !subtitle) {
         helper.handleError('All fields are required');
         return false;
     }
 
-    helper.sendPost(e.target.action, { name, age, favFood }, onDomoAdded);
+    helper.sendPost(e.target.action, { title, subtitle, content }, onMessageAdded);
     return false;
 };
 
-const DomoForm = (props) => {
+const MessageForm = (props) => {
     return (
-        <form id="domoForm"
-            onSubmit={(e) => handleDomo(e, props.triggerReload)}
-            name="domoForm"
+        <form id="messageForm"
+            onSubmit={(e) => handleMessage(e, props.triggerReload)}
+            title="messageForm"
             action="/maker"
             method="POST"
-            className="domoForm"
+            classTitle="messageForm"
         >
-            <label htmlFor="name">Name: </label>
-            <input id="domoName" type="text" name="name" placeholder="Domo Name" />
+            <label htmlFor="title">Title: </label>
+            <input id="messageTitle" type="text" title="title" placeholder="Message Title" />
 
-            <label htmlFor="favFood">Favorite Food: </label>
-            <input id="domoFavFood" type="text" name="favFood" placeholder="Domo's Favorite Food" />
+            <label htmlFor="subtitle">Subtitle: </label>
+            <input id="messageAge" type="number" min="0" title="subtitle" />
 
-            <label htmlFor="age">Age: </label>
-            <input id="domoAge" type="number" min="0" name="age" />
+            <label htmlFor="content">Favorite Food: </label>
+            <input id="messageContent" type="text" title="content" placeholder="Message's Favorite Food" />
 
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+
+            <input classTitle="makeMessageSubmit" type="submit" value="Make Message" />
         </form>
     );
 };
 
-const DomoList = (props) => {
-    const [domos, setDomos] = useState(props.domos);
+const MessageList = (props) => {
+    const [messages, setMessages] = useState(props.messages);
 
     useEffect(() => {
-        const loadDomosFromServer = async () => {
-            const response = await fetch('/getDomos');
+        const loadMessagesFromServer = async () => {
+            const response = await fetch('/getMessages');
             const data = await response.json();
-            setDomos(data.domos);
+            setMessages(data.messages);
         };
-        loadDomosFromServer();
-    }, [props.reloadDomos]);
+        loadMessagesFromServer();
+    }, [props.reloadMessages]);
 
-    if (domos.length === 0) {
+    if (messages.length === 0) {
         return (
-            <div className="domoList">
-                <h3 className="emptyDomo">No Domos yet!</h3>
+            <div classTitle="messageList">
+                <h3 classTitle="emptyMessage">No Messages yet!</h3>
             </div>
         );
     }
 
-    const domoNodes = domos.map(domo => {
+    const messageNodes = messages.map(message => {
         const handleDelete = async () => {
-            await helper.sendDelete('/deleteDomo', { id: domo._id }, () => { //deleting domos
+            await helper.sendDelete('/deleteMessage', { id: message._id }, () => { //deleting messages
                 props.triggerReload();
             });
         };
 
         return (
-            <div key={domo._id} className="domo">
-                <h3 className="domoName">{domo.name}</h3>
-                <img src="/assets/img/domoFace.jpeg" alt="Domo Face" className="domoFace" />
-                <h3 className="domoAge">Age: {domo.age}</h3>
-                {domo.favFood && <h4 className="domoFavFood">Favorite Food: {domo.favFood}</h4>}
-                <button onClick={handleDelete} className="deleteButton">Delete</button>
+            <div key={message._id} classTitle="message">
+                <h3 classTitle="messageTitle">{message.title}</h3>
+                <img src="/assets/img/messageFace.jpeg" alt="Message Face" classTitle="messageFace" />
+                <h3 classTitle="messageAge">Subtitle: {message.subtitle}</h3>
+                {message.content && <h4 classTitle="messageContent">Favorite Food: {message.content}</h4>}
+                <button onClick={handleDelete} classTitle="deleteButton">Delete</button>
                 
             </div>
         );
     });
 
     return (
-        <div className="domoList">
-            {domoNodes}
+        <div classTitle="messageList">
+            {messageNodes}
         </div>
     );
 };
 
 const App = () => {
-    const [reloadDomos, setReloadDomos] = useState(false);
+    const [reloadMessages, setReloadMessages] = useState(false);
 
     return (
         <div>
-            <div id="makeDomo">
-                <DomoForm triggerReload={() => setReloadDomos(!reloadDomos)} />
+            <div id="makeMessage">
+                <MessageForm triggerReload={() => setReloadMessages(!reloadMessages)} />
             </div>
-            <div id="domos">
-                <DomoList domos={[]} reloadDomos={reloadDomos} triggerReload={() => setReloadDomos(!reloadDomos)} />
+            <div id="messages">
+                <MessageList messages={[]} reloadMessages={reloadMessages} triggerReload={() => setReloadMessages(!reloadMessages)} />
             </div>
         </div>
     );
