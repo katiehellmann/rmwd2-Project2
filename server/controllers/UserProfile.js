@@ -29,4 +29,5 @@ module.exports.updatePassword = async (req, res) => {
     console.error('Error updating password:', error);
     return res.status(500).send('Error updating password');
   }
+  return false;
 };
