@@ -13,9 +13,11 @@ const router = (app) => {
   app.get('/logout', mid.requiresLogin, controller.Account.logout);
   app.get('/maker', mid.requiresLogin, controller.Message.makerPage);
   app.post('/maker', mid.requiresLogin, controller.Message.makeMessage);
-
   app.get('/', mid.requiresSecure, mid.requiresLogout, controller.Account.loginPage);
   app.post('/deleteMessage', mid.requiresLogin, controller.Message.deleteMessage);
+
+  app.get('/profile', mid.requiresLogin, controller.Profile.ProfilePage);
+  app.post('/updatePassword', mid.requiresLogin, controller.Profile.updatePassword);
 };
 
 module.exports = router;

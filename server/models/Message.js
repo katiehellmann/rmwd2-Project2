@@ -9,8 +9,8 @@ const MessageSchema = new mongoose.Schema({
     required: true,
     set: setName,
   },
-  subtitle: {
-    type: String,
+  rating: {
+    type: Number,
     required: true,
     min: 0,
   },
@@ -32,7 +32,7 @@ const MessageSchema = new mongoose.Schema({
 
 MessageSchema.statics.toAPI = (doc) => ({
   title: doc.title,
-  subtitle: doc.subtitle,
+  rating: doc.rating,
   content: doc.content,
 });
 

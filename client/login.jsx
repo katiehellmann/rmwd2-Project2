@@ -42,6 +42,7 @@ const handleSignup = (e) => {
 
 const LoginWindow = (props) => {
     return (
+   
         <form id="loginForm"
             name="loginForm"
             onSubmit={handleLogin}
@@ -49,17 +50,21 @@ const LoginWindow = (props) => {
             method="POST"
             className="mainForm"
         >
+            <div class="bg-element/90 rounded p-8">
             <label htmlFor="username">Username: </label>
             <input id="user" type="text" name="username" placeholder="username" />
             <label htmlFor="pass">Password: </label>
             <input id="pass" type="password" name="pass" placeholder="password" />
             <input className="formSubmit" type="submit" value="Sign In" />
+            </div>
         </form>
+
     );
 };
 
 const SignupWindow = (props) => {
     return (
+    
         <form id="signupForm"
             name="signupForm"
             onSubmit={handleSignup}
@@ -67,6 +72,7 @@ const SignupWindow = (props) => {
             method="POST"
             className="mainForm"
         >
+            <div class="bg-element/90 rounded p-8">
             <label htmlFor="username">Username: </label>
             <input id="user" type="text" name="username" placeholder="username" />
             <label htmlFor="pass">Password: </label>
@@ -74,7 +80,9 @@ const SignupWindow = (props) => {
             <label htmlFor="pass">Password: </label>
             <input id="pass2" type="password" name="pass2" placeholder="retype password" />
             <input className="formSubmit" type="submit" value="Sign In" />
+            </div>
         </form>
+   
     );
 }
 

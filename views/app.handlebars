@@ -1,12 +1,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Character Designer</title>
+  <title>Book Log - Home</title>
   <link rel="shortcut icon" href="/assets/img/favicon.png"/>
-  <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+  <link rel="stylesheet" type="text/css" href="/assets/output.css"/>
 </head>
-<body>
-  <nav><a href="/login"><img id="logo" src="/assets/img/tortilla.png" alt="cat"/></a>
+<body class="bg-surface align-center">
+  <nav class="bg-secondary"><a href="/login"><img id="logo" src="/assets/img/book.png" alt="book"/></a>
+    <div class="navlink"><a href="/Profile">Profile</a></div>
     <div class="navlink"><a href="/logout">Log out</a></div>
   </nav>
 
@@ -17,9 +18,12 @@
   <div id="catMessage" class='hidden'>
     <img id="speech" src="/assets/img/speech.png" alt="speech box"/>
     <h3><span id="errorMessage"></span></h3>
-    <img id="cat" src="assets/img/login.png" alt="cat"/>
+    <img id="cat" src="assets/img/tortilla.png" alt="cat"/>
   </div>
   
   <script src="/assets/appBundle.js"></script>
 </body>
+<footer class="p-2 m-2 min-h-screen">
+  <a target="_blank" href="https://icons8.com/icon/119436/book">Book</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+</footer>
 </html>

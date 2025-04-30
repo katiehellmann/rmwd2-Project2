@@ -5,13 +5,13 @@ const { Message } = models;
 const makerPage = (req, res) => res.render('app');
 
 const makeMessage = async (req, res) => {
-  if (!req.body.title || !req.body.subtitle) {
+  if (!req.body.title || !req.body.rating) {
     return res.status(400).json({ error: 'Both fields are required!' });
   }
 
   const messageData = {
     title: req.body.title,
-    subtitle: req.body.subtitle,
+    rating: req.body.rating,
     content: req.body.content || '',
     owner: req.session.account._id,
   };
@@ -23,7 +23,7 @@ const makeMessage = async (req, res) => {
       .status(201)
       .json({
         title: newMessage.title,
-        subtitle: newMessage.subtitle,
+        rating: newMessage.rating,
         content: newMessage.content,
       });
   } catch (err) {
@@ -39,7 +39,7 @@ const getMessages = async (req, res) => {
   try {
     const query = { owner: req.session.account._id };
     const docs = await Message.find(query)
-      .select('titlr subtitle content')
+      .select('title rating content')
       .lean()
       .exec();
 

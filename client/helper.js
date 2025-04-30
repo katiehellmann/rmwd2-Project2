@@ -4,6 +4,13 @@
 */
 const handleError = (message) => {
     document.getElementById('errorMessage').textContent = message;
+    document.getElementById('catMessage').classList.add('text-red');
+    document.getElementById('catMessage').classList.remove('hidden');
+};
+
+const handleSuccess = (message) => {
+    document.getElementById('errorMessage').textContent = message;
+    document.getElementById('catMessage').classList.add('text-green');
     document.getElementById('catMessage').classList.remove('hidden');
 };
 

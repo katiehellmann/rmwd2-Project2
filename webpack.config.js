@@ -1,9 +1,12 @@
 const path = require('path');
+//const { default: PasswordForm } = require('./client/PasswordForm');
 
 module.exports = {
     entry: {
         app: './client/maker.jsx',
         login: './client/login.jsx',
+        //PasswordForm: './client/PasswordForm.jsx',
+        profile: './client/UserProfile.jsx',
     },
     module: {
         rules: [
